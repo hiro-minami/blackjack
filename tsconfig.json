@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "target": "ES5", //変換後の形式
+        "module": "ES2015", //モジュールの呼び出し方
+        "noImplicitAny": true //型定義がないものを勝手にanyにしない
+    }
+}

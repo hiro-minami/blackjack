@@ -1,2 +1,0 @@
-# blackjack
-playing blackjack game
