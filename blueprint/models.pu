@@ -1,0 +1,35 @@
+@startuml Blackjack
+class Card {
+    + suit: string
+    + rank: string
+    + getRankNumber(hand: string): number
+    + getRank(hand: string): string
+    + isNumber(hand: string): boolean
+}
+
+class Deck {
+    + cards: Card[]
+    + shuffle(): void
+}
+
+class Player {
+    + hand: Card[]
+    + chips: number
+    + bet: number
+    + gameStatus: string
+    + makeBet(chips: number): number
+    + blackjackTakeAction(action?: string): string
+}
+
+class Table {
+    + players: Player[]
+    + house: Player
+    + deck: Deck
+    + blackjackEvaluateRoundWinners: Player[]
+}
+
+Deck o--> Card
+Player o--> Deck
+Table o-->Player
+Table o--> Deck
+@enduml

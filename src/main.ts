@@ -1,5 +1,3 @@
-const Hello = (name: string): string => {
-    return "Hello " + name;
+export const SayHello = (): string => {
+    return "Hello! TypeScript!";
 };
-
-alert(Hello("hoge"));
