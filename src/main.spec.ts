@@ -1,11 +1,11 @@
-import { SayHello } from "./main";
+import { startGame } from "./main";
 
 describe("SayHello", () => {
     test('toBe "Hello! TypeScript!"', () => {
-        expect(SayHello()).toBe("Hello! TypeScript!");
+        expect(startGame()).toBe("");
     });
 
     test('not toBe "Hello! JavaScript!"', () => {
-        expect(SayHello()).not.toBe("Hello! JavaScript!");
+        expect(startGame()).not.toBe("");
     });
 });
