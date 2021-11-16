@@ -1,35 +1,101 @@
 @startuml Blackjack
 class Card {
-    + suit: string
-    + rank: string
-    + getRankNumber(hand: string): number
-    + getRank(hand: string): string
-    + isNumber(hand: string): boolean
+    + suit: string;
+    + rank: string;
+    + constructor(suit: string, rank: string) 
+    + getRankNumber(): number 
+    - getRank(hand: string): string 
+    - isNumber(hand: string): boolean 
 }
 
 class Deck {
-    + cards: Card[]
+    + cards: Card[];
+    + constructor(gameType?: string)
     + shuffle(): void
+    + resetDeck(): Card[]
+    + drawOne(): Card
 }
 
-class Player {
-    + hand: Card[]
-    + chips: number
-    + bet: number
-    + gameStatus: string
-    + makeBet(chips: number): number
-    + blackjackTakeAction(action?: string): string
+interface AbstractPlayer {
+    name: string;
+    playerType: PlayerType;
+    getHandScore(): number;
+    isBlackjack(): boolean;
+}
+
+interface AbstractBlackjackPlayer extends AbstractPlayer {
+    hand: Card[];
+    chips: number;
+    bet: number;
+    status: PlayerStatus;
+    decision: Action;
+}
+
+class House implements AbstractPlayer {
+    + name: string;
+    + playerType: PlayerType = "house";
+    + hand: Card[];
+    + status: Action;
+    + constructor(name: string)
+    + getHandScore(): number
+    + isBlackjack(): boolean
+}
+
+class AiPlayer implements AbstractBlackjackPlayer {
+    + name: string;
+    + playerType: PlayerType = "ai";
+    + chips: number;
+    + hand: Card[];
+    + bet: number = 0;
+    + status: PlayerStatus;
+    + decision: Action;
+    + constructor(name: string, chips: number = 400)
+    + getHandScore(): number
+    + isBlackjack(): boolean
+}
+
+class User implements AbstractBlackjackPlayer {
+    + name: string;
+    + playerType: PlayerType = "user";
+    + chips: number;
+    + hand: Card[];
+    + bet: number;
+    + status: PlayerStatus;
+    + decision: Action;
+    + constructor(name: string, chips: number = 400)
+    + getHandScore(): number
+    + isBlackjack(): boolean
 }
 
 class Table {
-    + players: Player[]
-    + house: Player
-    + deck: Deck
-    + blackjackEvaluateRoundWinners: Player[]
+    + betDenominations: number[] = [10, 20, 50, 100];
+    + gameType: GameType;
+    + deck: Deck;
+    + players: AbstractBlackjackPlayer[];
+    + house: House;
+    + turnCounter: number = 0;
+    + gamePhase: GamePhase;
+    + resultsLog: string[];
+    + gameResult: GameResult[];
+    + resultRank: AbstractBlackjackPlayer[];
+    + constructor(gameType: GameType)
+    + startBlackjack(playerName: string, playerAmount: number, bet: number)
+    - selectBet(): void
+    - blackjackAssignPlayerHands(): void
+    - action(): void
+    - battleAndPayoff(): void
+    - checkForDropout(): void
+    - blackjackClearPlayerHandsAndBets(): void
+    - outputLogs(count: number): void
+    - draw(player: AbstractPlayer): void
+    - getTurnPlayer(): AbstractBlackjackPlayer
+    - battleWithHouse(): string[]
+    - payoff(resultList: string[]): void
 }
 
 Deck o--> Card
-Player o--> Deck
-Table o-->Player
+Table o-->AbstractPlayer
 Table o--> Deck
+AbstractBlackjackPlayer o--> Card
+House o--> Card
 @enduml
