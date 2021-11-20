@@ -1,7 +1,6 @@
 export const actionZone = () => {
-    let counterList = [0, 0, 0, 0];
     return `
-    <div class="action-container">
+    <div class="action-container none">
         <button id="surrenderButton" class="action-button center">Surrender</button>
         <button id="standButton" class="action-button center">Stand</button>
         <button id="hitButton" class="action-button center">Hit</button>

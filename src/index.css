@@ -139,6 +139,12 @@ body {
     color: rgb(221, 25, 25);
 }
 
+.texts-phase {
+    font-family: "Bradley Hand";
+    font-size: 50px;
+    color: rgb(225, 236, 225);
+}
+
 .justify-contents-center {
     display: flex;
     justify-content: space-around;
@@ -185,7 +191,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.18);
     margin: 5px;
     width: 60px;
-    height: 75px;
+    height: 80px;
 }
 
 .form {
@@ -228,4 +234,8 @@ body {
 
 .input-name {
     margin-top: 30px;
+}
+
+.none {
+    display: none;
 }

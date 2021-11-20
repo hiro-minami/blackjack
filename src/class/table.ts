@@ -10,12 +10,13 @@ export default class Table {
     public players: AbstractBlackjackPlayer[];
     public house: House;
     public turnCounter: number = 0;
+    public gameCounter: number = 1;
     public gamePhase: GamePhase;
     public resultsLog: string[];
     public resultRank: AbstractBlackjackPlayer[];
     constructor() {
         this.deck = new Deck();
-        this.players = [new AiPlayer("ai1"), new AiPlayer("ai2"), new AiPlayer("ai3"), new AiPlayer("ai4")];
+        this.players = [new AiPlayer("Raoh"), new AiPlayer("Toki"), new AiPlayer("Jagi"), new AiPlayer("Kenshiro")];
         this.house = new House("house");
         this.resultRank = [];
     }
@@ -23,31 +24,30 @@ export default class Table {
         // ユーザーを追加する
         this.players.push(new User(playerName));
         this.gamePhase = "betting";
-        let count = 0;
-        while (this.gamePhase != "gameOver") {
-            console.log("#################################");
-            // 掛け金を求める
-            this.selectBet();
-            // デッキを作り、シャッフルする
-            this.deck = new Deck();
-            this.deck.shuffle();
-            // デッキからカードを2枚どろーする
-            this.blackjackAssignPlayerHands();
-            // 各プレイヤーの動作を決める
-            this.action();
-            // ハウスと勝負
-            this.battleAndPayoff();
-            // ログを出力
-            this.outputLogs(count);
-            // 脱落者の確認
-            this.checkForDropout();
-            // クリーンアウト
-            this.blackjackClearPlayerHandsAndBets();
-            if (this.players.length <= 1 || count > 1000) this.gamePhase = "gameOver";
-            count++;
-        }
-        if (this.players.length === 1) console.log(`First: ${this.players[0].name}, Second: ${this.resultRank[0].name}, Third: ${this.resultRank[1].name}, Last: ${this.resultRank[2].name}`);
-        else console.log(`First: ${this.resultRank[0].name}, Second: ${this.resultRank[1].name}, Third: ${this.resultRank[2].name}, Last: ${this.resultRank[3].name}`);
+        //while (this.gamePhase != "gameOver") {
+        console.log("#################################");
+        // 掛け金を求める
+        this.selectBet();
+        // デッキを作り、シャッフルする
+        this.deck = new Deck();
+        this.deck.shuffle();
+        // デッキからカードを2枚どろーする
+        this.blackjackAssignPlayerHands();
+        // 各プレイヤーの動作を決める
+        this.action();
+        // ハウスと勝負
+        this.battleAndPayoff();
+        // ログを出力
+        this.outputLogs(this.gameCounter);
+        // 脱落者の確認
+        this.checkForDropout();
+        // クリーンアウト
+        this.blackjackClearPlayerHandsAndBets();
+        if (this.players.length <= 1 || this.gameCounter > 1000) this.gamePhase = "gameOver";
+        this.gameCounter++;
+        //}
+        // if (this.players.length === 1) console.log(`First: ${this.players[0].name}, Second: ${this.resultRank[0].name}, Third: ${this.resultRank[1].name}, Last: ${this.resultRank[2].name}`);
+        // else console.log(`First: ${this.resultRank[0].name}, Second: ${this.resultRank[1].name}, Third: ${this.resultRank[2].name}, Last: ${this.resultRank[3].name}`);
     }
     public selectBet() {
         this.players.forEach((player: AbstractBlackjackPlayer) => {

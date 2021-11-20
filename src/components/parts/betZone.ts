@@ -1,5 +1,6 @@
 export const betZone = () => {
     let counterList = [0, 0, 0, 0];
+
     return `
     <div class="bet-container flex-direction-column">
         <div class="bet-section justify-contents-center">

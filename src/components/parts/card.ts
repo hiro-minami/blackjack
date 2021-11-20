@@ -1,29 +1,29 @@
 import Card from "../../class/card";
 
-export const card = (cars?: Card[]) => {
+export const card = (cards: Card[]) => {
     return `
     <div class="hands justify-contents-center">
         <div class="card flex-direction-column">
-            <span class="card-texts">♠︎</span>
-            <span class="card-texts">A</span>
+            <span class="card-texts">${cards[0].suit}</span>
+            <span class="card-texts">${cards[0].rank}</span>
         </div>
         <div class="card flex-direction-column">
-            <span class="card-texts-red">❤︎</span>
-            <span class="card-texts-red">K</span>
+            <span class="card-texts-red">${cards[1].suit}</span>
+            <span class="card-texts-red">${cards[1].rank}</span>
         </div>
     </div>`;
 };
 
-export const hiddenCard = (cars?: Card[]) => {
+export const hiddenCard = (cards: Card[]) => {
     return `
     <div class="hands justify-contents-center">
         <div class="card flex-direction-column">
-            <span class="card-texts-hidden">♠︎</span>
-            <span class="card-texts-hidden">A</span>
+            <span class="card-texts-hidden">${cards[0].suit}</span>
+            <span class="card-texts-hidden">${cards[0].rank}</span>
         </div>
         <div class="card flex-direction-column">
-            <span class="card-texts-hidden">❤︎</span>
-            <span class="card-texts-hidden">K</span>
+            <span class="card-texts-hidden">${cards[1].suit}</span>
+            <span class="card-texts-hidden">${cards[1].rank}</span>
         </div>
     </div>`;
 };
