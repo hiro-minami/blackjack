@@ -20,7 +20,7 @@ export const betZone = () => {
                 </div>
             </div>
             <div class="flex-direction-column">
-                <div class="coin center"50</div>
+                <div class="coin center">50</div>
                 <div class="bet-zone justify-contents-center">
                     <button type="button" class="minus-button center">-</button>
                     <div class="amount-disp center">${counterList[2]}</div>
