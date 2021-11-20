@@ -42,9 +42,9 @@ export class AiPlayer implements AbstractBlackjackPlayer {
     public bet: number = 0;
     public status: PlayerStatus;
     public decision: Action;
-    constructor(name: string, chips: number = 100) {
+    constructor(name: string) {
         this.name = name;
-        this.chips = chips;
+        this.chips = 400;
         this.hand = [];
     }
     public getHandScore(): number {
@@ -64,9 +64,9 @@ export class User implements AbstractBlackjackPlayer {
     public bet: number;
     public status: PlayerStatus;
     public decision: Action;
-    constructor(name: string, chips: number = 400) {
+    constructor(name: string) {
         this.name = name;
-        this.chips = chips;
+        this.chips = 400;
         this.hand = [];
     }
     public getHandScore(): number {
