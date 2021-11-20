@@ -1,11 +1,12 @@
-import { startGame } from "./main";
+import Table from "./class/table";
+import { startGame } from "./functions/index";
 
 describe("SayHello", () => {
     test('toBe "Hello! TypeScript!"', () => {
-        expect(startGame()).toBe("");
+        expect(startGame(new Table())).toBe("");
     });
 
     test('not toBe "Hello! JavaScript!"', () => {
-        expect(startGame()).not.toBe("");
+        expect(startGame(new Table())).not.toBe("");
     });
 });

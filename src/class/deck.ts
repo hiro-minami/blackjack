@@ -2,7 +2,7 @@ import Card from "./card";
 
 export default class Deck {
     public cards: Card[];
-    constructor(gameType?: string) {
+    constructor() {
         this.cards = this.resetDeck();
     }
     public shuffle() {

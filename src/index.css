@@ -1,0 +1,231 @@
+body {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: URL("./assets/img/background.jpeg") center / cover;
+}
+
+.action-container {
+    display: flex;
+    justify-content: center;
+}
+
+.action-button {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 100px;
+    padding: 10px;
+    border-radius: 5000px;
+    color: rgb(225, 236, 225);
+}
+
+.action-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.bet-zone {
+    margin: 5px;
+}
+
+.coin {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin: 5px;
+    width: 25px;
+    padding: 10px;
+    border-radius: 5000px;
+    color: rgb(225, 236, 225);
+}
+
+.game-title {
+    font-family: "Bradley Hand";
+    font-size: 80px;
+    margin-top: 100px;
+    color: rgb(225, 236, 225);
+}
+
+.game-button {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin: 5px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 5000px;
+    color: rgb(225, 236, 225);
+}
+
+.game-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.minus-button {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(225, 236, 225);
+}
+
+.minus-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.plus-button {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(225, 236, 225);
+}
+
+.plus-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.amount-disp {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(225, 236, 225);
+}
+
+.texts {
+    font-family: "Bradley Hand";
+    font-size: 30px;
+    color: rgb(225, 236, 225);
+}
+
+.card-texts {
+    font-family: "Bradley Hand";
+    font-size: 30px;
+    color: rgb(14, 15, 14);
+}
+
+.card-texts-hidden {
+    display: none;
+}
+
+.card-texts-red {
+    font-family: "Bradley Hand";
+    font-size: 30px;
+    color: rgb(221, 25, 25);
+}
+
+.justify-contents-center {
+    display: flex;
+    justify-content: space-around;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-direction-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+}
+
+.house-container {
+    margin-top: 20px;
+}
+
+.ai-container {
+    height: 18vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user-container {
+    margin-bottom: 10px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin: 5px;
+    width: 60px;
+    height: 75px;
+}
+
+.form {
+    /* From https://css.glass */
+    background: rgba(237, 247, 238, 0.19);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(237, 247, 238, 0.3);
+    width: 300px;
+}
+
+.input-child {
+    background: rgba(255, 255, 255, 0.15);
+    width: 200px;
+    padding: 10px;
+    margin-bottom: 2em;
+    border: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5000px;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    box-shadow: 4px 4px 60px rgb(0 0 0 / 20%);
+    color: #fff;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 20%);
+}
+
+.input-child:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+::placeholder {
+    color: white;
+}
+
+.input-name {
+    margin-top: 30px;
+}

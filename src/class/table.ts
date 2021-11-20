@@ -1,29 +1,28 @@
 import Card from "./card";
 import Deck from "./deck";
-import { House, AiPlayer, AbstractBlackjackPlayer, AbstractPlayer } from "./player";
-import { GamePhase, GameType, GameResult } from "../types/index";
+import { House, AiPlayer, AbstractBlackjackPlayer, AbstractPlayer, User } from "./player";
+import { GamePhase, GameResult } from "../types/index";
 import RandomHelper from "./randomHelper";
 
 export default class Table {
     public betDenominations: number[] = [10, 20, 50, 100];
-    public gameType: GameType;
     public deck: Deck;
     public players: AbstractBlackjackPlayer[];
     public house: House;
     public turnCounter: number = 0;
     public gamePhase: GamePhase;
     public resultsLog: string[];
-    public gameResult: GameResult[];
     public resultRank: AbstractBlackjackPlayer[];
-    constructor(gameType: GameType) {
-        this.gameType = gameType;
-        this.deck = new Deck(this.gameType);
-        this.players = [new AiPlayer("ai1"), new AiPlayer("ai2"), new AiPlayer("ai3")];
+    constructor() {
+        this.deck = new Deck();
+        this.players = [new AiPlayer("ai1"), new AiPlayer("ai2"), new AiPlayer("ai3"), new AiPlayer("ai4")];
         this.house = new House("house");
-        this.gamePhase = "betting";
         this.resultRank = [];
     }
-    public startBlackjack(playerName: string, playerAmount: number, bet: number) {
+    public startBlackjack(playerName: string) {
+        // ユーザーを追加する
+        this.players.push(new User(playerName));
+        this.gamePhase = "betting";
         let count = 0;
         while (this.gamePhase != "gameOver") {
             console.log("#################################");
@@ -44,26 +43,25 @@ export default class Table {
             this.checkForDropout();
             // クリーンアウト
             this.blackjackClearPlayerHandsAndBets();
-            if (this.players.length <= 1) this.gamePhase = "gameOver";
-            if (count > 1000) this.gamePhase = "gameOver";
+            if (this.players.length <= 1 || count > 1000) this.gamePhase = "gameOver";
             count++;
         }
-        if (this.players.length === 1) console.log(`First: ${this.players[0].name}, Second: ${this.resultRank[0].name}, Third: ${this.resultRank[1].name}`);
-        else console.log(`First: ${this.resultRank[0].name}, Second: ${this.resultRank[1].name}, Third: ${this.resultRank[2].name}`);
+        if (this.players.length === 1) console.log(`First: ${this.players[0].name}, Second: ${this.resultRank[0].name}, Third: ${this.resultRank[1].name}, Last: ${this.resultRank[2].name}`);
+        else console.log(`First: ${this.resultRank[0].name}, Second: ${this.resultRank[1].name}, Third: ${this.resultRank[2].name}, Last: ${this.resultRank[3].name}`);
     }
-    private selectBet() {
+    public selectBet() {
         this.players.forEach((player: AbstractBlackjackPlayer) => {
             const num: number = RandomHelper.selectRandom(0, 3);
             player.bet = this.betDenominations[+num];
         });
     }
-    private blackjackAssignPlayerHands(): void {
+    public blackjackAssignPlayerHands(): void {
         this.players.forEach((player: AbstractBlackjackPlayer) => {
             this.draw(player);
         });
         this.draw(this.house);
     }
-    private action() {
+    public action() {
         this.gamePhase = "acting";
         while (this.gamePhase === "acting") {
             const currentPlayer = this.getTurnPlayer();
@@ -79,7 +77,7 @@ export default class Table {
             if (this.players.filter((player) => player.decision === "stand" || player.decision === "surrender").length == this.players.length) this.gamePhase = "evaluatingWinners";
         }
     }
-    private battleAndPayoff() {
+    public battleAndPayoff() {
         // houseの状態を確認
         while (this.house.status !== "stand" && this.house.status !== "surrender") {
             const houseScore = this.house.getHandScore();
@@ -90,14 +88,14 @@ export default class Table {
                 this.house.hand.push(this.deck.drawOne());
             }
         }
-        const result: string[] = this.battleWithHouse();
-        this.payoff(result);
+        const resultList = this.battleWithHouse();
+        this.payoff(resultList);
     }
-    private checkForDropout() {
+    public checkForDropout() {
         this.resultRank.unshift(...this.players.filter((player: AbstractBlackjackPlayer) => player.chips <= 0));
         this.players = this.players.filter((player: AbstractBlackjackPlayer) => player.chips > 0);
     }
-    private blackjackClearPlayerHandsAndBets(): void {
+    public blackjackClearPlayerHandsAndBets(): void {
         this.players.forEach((player: AiPlayer) => {
             player.hand = [];
             player.bet = 0;
@@ -107,7 +105,7 @@ export default class Table {
         this.players.forEach((player: AbstractBlackjackPlayer) => (player.decision = "bet"));
         this.house.status = "bet";
     }
-    private outputLogs(count: number) {
+    public outputLogs(count: number) {
         console.log(`Round ${count + 1}`);
         this.players.forEach((player: AbstractBlackjackPlayer) => {
             console.log(`name:${player.name}, action:${player.decision}, bet:${player.bet}, chip:${player.chips}`);
@@ -120,8 +118,8 @@ export default class Table {
     private getTurnPlayer(): AbstractBlackjackPlayer {
         return this.players[this.turnCounter % this.players.length];
     }
-    private battleWithHouse() {
-        let resultList: string[] = [];
+    private battleWithHouse(): GameResult[] {
+        let resultList: GameResult[] = [];
         // ハウスの手札を確認する
         if (this.house.status === "surrender") {
             this.players.forEach(() => resultList.push("win"));
@@ -135,7 +133,7 @@ export default class Table {
 
         return resultList;
     }
-    private payoff(resultList: string[]): void {
+    private payoff(resultList: GameResult[]): void {
         resultList.forEach((result: string, index: number) => {
             if (result === "win") this.players[index].chips += this.players[index].bet;
             else if (this.players[index].decision === "surrender") this.players[index].chips -= Math.floor(this.players[index].bet / 2);
