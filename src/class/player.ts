@@ -61,7 +61,7 @@ export class User implements AbstractBlackjackPlayer {
     public playerType: PlayerType = "user";
     public chips: number;
     public hand: Card[];
-    public bet: number;
+    public bet: number = 0;
     public status: PlayerStatus;
     public decision: Action;
     constructor(name: string) {

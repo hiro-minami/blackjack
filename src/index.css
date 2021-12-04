@@ -123,6 +123,12 @@ body {
     color: rgb(225, 236, 225);
 }
 
+.bet-texts {
+    font-family: "Bradley Hand";
+    font-size: 15px;
+    color: rgb(225, 236, 225);
+}
+
 .card-texts {
     font-family: "Bradley Hand";
     font-size: 30px;

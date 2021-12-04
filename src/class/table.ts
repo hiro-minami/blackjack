@@ -5,7 +5,7 @@ import { GamePhase, GameResult } from "../types/index";
 import RandomHelper from "./randomHelper";
 
 export default class Table {
-    public betDenominations: number[] = [10, 20, 50, 100];
+    public betDenominations: number[] = [5, 20, 50, 100];
     public deck: Deck;
     public players: AbstractBlackjackPlayer[];
     public house: House;
@@ -27,7 +27,7 @@ export default class Table {
         //while (this.gamePhase != "gameOver") {
         console.log("#################################");
         // 掛け金を求める
-        this.selectBet();
+        //this.selectBet();
         // デッキを作り、シャッフルする
         this.deck = new Deck();
         this.deck.shuffle();
@@ -49,10 +49,23 @@ export default class Table {
         // if (this.players.length === 1) console.log(`First: ${this.players[0].name}, Second: ${this.resultRank[0].name}, Third: ${this.resultRank[1].name}, Last: ${this.resultRank[2].name}`);
         // else console.log(`First: ${this.resultRank[0].name}, Second: ${this.resultRank[1].name}, Third: ${this.resultRank[2].name}, Last: ${this.resultRank[3].name}`);
     }
-    public selectBet() {
+    public selectBet(value: number) {
+        console.log(this.players);
         this.players.forEach((player: AbstractBlackjackPlayer) => {
-            const num: number = RandomHelper.selectRandom(0, 3);
-            player.bet = this.betDenominations[+num];
+            console.log(player.playerType);
+            console.log(player.playerType === "ai");
+            if (player.playerType === "ai") {
+                for (let i = 0; i < 3; i++) {
+                    const num: number = RandomHelper.selectRandom(0, 3);
+                    player.bet += this.betDenominations[+num];
+                    if (player.bet > player.chips) {
+                        player.bet = player.chips;
+                        break;
+                    }
+                }
+            } else {
+                player.bet = value;
+            }
         });
     }
     public blackjackAssignPlayerHands(): void {
@@ -115,7 +128,7 @@ export default class Table {
         player.hand.push(this.deck.drawOne());
         player.hand.push(this.deck.drawOne());
     }
-    private getTurnPlayer(): AbstractBlackjackPlayer {
+    public getTurnPlayer(): AbstractBlackjackPlayer {
         return this.players[this.turnCounter % this.players.length];
     }
     private battleWithHouse(): GameResult[] {
