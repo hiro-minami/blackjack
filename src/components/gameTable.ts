@@ -2,13 +2,18 @@ import Table from "../class/table";
 import { card, hiddenCard } from "./parts/card";
 import { betZone } from "./parts/betZone";
 import { actionZone } from "./parts/actionZone";
+import { afterGamaZone } from "./parts/afterGameZone";
+import { AbstractBlackjackPlayer } from "../class/player";
 
 export const gameTable = (table: Table) => {
+    table.players.forEach((player: AbstractBlackjackPlayer) => {
+        player.bet = 0;
+    });
     return `
     <div class="table">
         <div class="house-container flex-direction-column">
             <div class="house-zone flex-direction-column">
-                <span class="texts">dealer</span>
+                <span class="texts">House</span>
             </div>
         </div>
         <div class="ai-container top">
@@ -53,5 +58,6 @@ export const gameTable = (table: Table) => {
         </div>
     </div>
     ${betZone(table.players[table.players.length - 1])}
-    ${actionZone()}`;
+    ${actionZone()}
+    ${afterGamaZone()}`;
 };

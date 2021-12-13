@@ -1,17 +1,16 @@
 import { User } from "../../class/player";
-import { add, minus } from "../../functions/index";
 
 export const betZone = (user: User) => {
     return `
     <div class="bet-container flex-direction-column">
         <div class="justify-contents-center">
-            <div class="justify-contents-center">
+            <div class="justify-contents-center bet-value">
                 <span class="bet-texts bet-number">bet: </span>
                 <span class="bet-texts bet-number" id="user-bet">${user.bet}</span>
             </div>
-            <div class="justify-contents-center">
-            <span class="bet-texts chip-number">chip: </span>
-            <span class="bet-texts chip-number" id="user-chip">${user.chips}</span>
+            <div class="justify-contents-center chip-value">
+                <span class="bet-texts chip-number">chip: </span>
+                <span class="bet-texts chip-number" id="user-chip">${user.chips}</span>
             </div>
         </div>
         <div class="bet-section justify-contents-center">

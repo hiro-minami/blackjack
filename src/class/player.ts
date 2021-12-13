@@ -14,6 +14,7 @@ export interface AbstractBlackjackPlayer extends AbstractPlayer {
     bet: number;
     status: PlayerStatus;
     decision: Action;
+    result: boolean;
 }
 
 export class House implements AbstractPlayer {
@@ -42,6 +43,7 @@ export class AiPlayer implements AbstractBlackjackPlayer {
     public bet: number = 0;
     public status: PlayerStatus;
     public decision: Action;
+    public result: boolean;
     constructor(name: string) {
         this.name = name;
         this.chips = 400;
@@ -64,6 +66,7 @@ export class User implements AbstractBlackjackPlayer {
     public bet: number = 0;
     public status: PlayerStatus;
     public decision: Action;
+    public result: boolean;
     constructor(name: string) {
         this.name = name;
         this.chips = 400;

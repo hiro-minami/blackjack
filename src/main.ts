@@ -1,5 +1,7 @@
 import Table from "./class/table";
-import { startGame, initGame, selectAction, afterBet, minus, add } from "./functions/index";
+import { initGame, selectAction, afterBet } from "./controllers/index";
+import { add, minus } from "./controllers/betController";
+import { surrender, stand, hit, double } from "./controllers/actionController";
 import { gameTable } from "./components/gameTable";
 import { topPage } from "./components/topPage";
 
@@ -8,16 +10,14 @@ let table = new Table();
 const app = document.querySelector("#app");
 app.innerHTML = topPage;
 
-// 読み込み完了時、ゲームスタート
-const startButton: HTMLButtonElement = document.querySelector("#startButton");
-// Startボタンを押下したら実行
-startButton.addEventListener("click", () => {
-    //startGame(table);
-    //const name = document.querySelector("#inputName").innerHTML;
+const init = () => {
     const inputName: HTMLInputElement = document.querySelector("#inputName");
     const name = inputName.value != "" ? inputName.value : "User";
-    console.log(name);
     initGame(table, name);
+    playGame();
+};
+
+const playGame = () => {
     app.innerHTML = gameTable(table);
     document.querySelector("body").style.background = "URL('./assets/img/table.jpeg') center / cover";
 
@@ -45,17 +45,35 @@ startButton.addEventListener("click", () => {
         afterBet(table);
     });
 
-    // const actionButton: HTMLButtonElement = document.querySelector("#actionButton");
-    // actionButton.addEventListener("click", () => {
-    //     selectAction(table);
-    // });
+    const surrenderButton = document.querySelector("#surrenderButton");
+    surrenderButton.addEventListener("click", () => {
+        surrender(table.players[table.players.length - 1], table);
+    });
 
-    // const togguleButton: HTMLButtonElement = document.querySelector("#toggleButton");
-    // togguleButton.addEventListener("click", () => {
-    //     const cards = document.querySelectorAll(".card-texts-hidden");
-    //     console.log(cards);
-    //     cards.forEach((card: HTMLElement) => {
-    //         card.className = "card-texts";
-    //     });
-    // });
+    const standButton = document.querySelector("#standButton");
+    standButton.addEventListener("click", () => {
+        stand(table.players[table.players.length - 1], table);
+    });
+
+    const hitButton = document.querySelector("#hitButton");
+    hitButton.addEventListener("click", () => {
+        hit(table.players[table.players.length - 1], table);
+    });
+
+    const doubleButton = document.querySelector("#doubleButton");
+    doubleButton.addEventListener("click", () => {
+        double(table.players[table.players.length - 1], table);
+    });
+
+    const logButton = document.querySelector("#aftergame-zone");
+    logButton.addEventListener("click", () => {
+        playGame();
+    });
+};
+
+// 読み込み完了時、ゲームスタート
+const startButton: HTMLButtonElement = document.querySelector("#startButton");
+// Startボタンを押下したら実行
+startButton.addEventListener("click", () => {
+    init();
 });

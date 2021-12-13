@@ -31,6 +31,14 @@ body {
     margin: 5px;
 }
 
+.bet-value {
+    margin-right: 5px;
+}
+
+.chip-value {
+    margin-left: 5px;
+}
+
 .coin {
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -182,6 +190,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 .user-container {
